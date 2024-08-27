@@ -6,6 +6,23 @@
     <style></style>
 </head>
 <body>
+<div>
+    <h1>Currency converter</h1>
+    <form th:action="@{/}" th:object="${currencyConverter}" method="post">
+
+        <input type="number" id="amount" th:field="*{amount}" min="0"/>
+        <select id="from" th:field="*{fromCurrency}">
+            <option th:each="currencyCode : ${currencyCodes}" th:value="${currencyCode}"
+                    th:text="${currencyCode}"th:selected="${fromCurrency}"></option>
+        </select>
+        <input type="number" id="convertedAmount" th:field="*{convertedAmount}" min="0"/>
+        <select id="to" th:field="*{toCurrency}">
+            <option th:each="currencyCode : ${currencyCodes}" th:value="${currencyCode}"
+                    th:text="${currencyCode}"th:selected="${toCurrency}"></option>
+        </select>
+        </form>
+</div>
+
 
 </body>
 </html>
