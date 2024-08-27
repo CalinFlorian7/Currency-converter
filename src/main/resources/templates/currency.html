@@ -4,11 +4,31 @@
     <meta charset="UTF-8">
     <title>Currency converter</title>
     <style></style>
+    <link rel="stylesheet" href="/css/currency.css">
+    <script>
+         function submitForm() {
+            document.getElementById("currencyForm").submit();
+        }
+         function setupAutoSubmit() {
+            var inputs = document.querySelectorAll('#currencyForm input');
+            var selects = document.querySelectorAll('#currencyForm select');
+            selects.forEach(function(input) {
+                input.addEventListener('change', submitForm);
+            });
+            inputs.forEach(function(input) {
+                input.addEventListener('change', submitForm);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', setupAutoSubmit);
+
+    </script>
 </head>
 <body>
 <div>
     <h1>Currency converter</h1>
-    <form th:action="@{/}" th:object="${currencyConverter}" method="post">
+    <h2 th:text="${conversionResult}"> </h2>
+    <form th:action="@{/}" id="currencyForm" th:object="${currencyConverter}" method="post">
 
         <input type="number" id="amount" th:field="*{amount}" min="0"/>
         <select id="from" th:field="*{fromCurrency}">
